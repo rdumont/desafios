@@ -1,4 +1,4 @@
-package main
+package reddit
 
 type Thread struct {
 	Subreddit   string

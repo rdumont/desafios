@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/idwall/desafios/crawlers/reddit"
 )
 
 func main() {
@@ -12,7 +14,7 @@ func main() {
 		log.Fatal("One argument required")
 	}
 
-	scraper := NewScraper()
+	scraper := reddit.NewScraper()
 
 	subs := strings.Split(os.Args[1], ";")
 	for _, s := range subs {
@@ -25,7 +27,7 @@ func main() {
 	}
 }
 
-func printThreads(threads []Thread) {
+func printThreads(threads []reddit.Thread) {
 	if len(threads) == 0 {
 		return
 	}
