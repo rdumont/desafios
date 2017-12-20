@@ -34,3 +34,34 @@ O exemplo de output está [neste arquivo](https://github.com/idwall/desafios/blo
 - Uso do Docker.
 - Parametrização da quantidade de caracteres por linha.
 - Utilizar as versões mais atuais da linguagem que escolher para desenvolver (JavaScript ES6+; Java 8; Python 3, etc).
+
+
+## Uso
+
+### Com HTTP
+
+Primeiro, inicie o servidor usando docker:
+
+```sh
+$ docker build ./ -t strings
+$ docker run -p '3000:3000' strings
+```
+
+Então, envie uma requisição `POST` com o texto no corpo. As opções `justify` e `limit` são aceitas por query string.
+
+```sh
+$ curl -d "this is the end of the world as we know it" 'http://localhost:3000/wrap?limit=20&justify=true'
+this  is  the end of
+the world as we know
+it
+```
+
+### Com linha de comando
+
+Primeiro, é necessário ter Go instalado e que o repositório esteja no local correto dentro de GOPATH (`$GOPATH/src/github.com/idwall/desafios`).
+
+Use `go run` para executar o programa:
+
+```sh
+go run ./cmd/main.go -j 40 ./sample-input.txt
+```
