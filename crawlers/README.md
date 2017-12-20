@@ -28,3 +28,27 @@ Construir um robô que nos envie essa lista via Telegram sempre que receber o co
 
 
 Qualquer método para coletar os dados é válido. Caso não saiba por onde começar, procure por SeleniumHQ (Java), PhantomJS (Javascript) e Scrapy (Python).
+
+## Uso
+
+É necessário ter o Go instalado na sua máquina e o repositório clonado no lugar correto dentro do GOPATH (`$GOPATH/src/github.com/idwall/desafios`).
+
+### Por linha de comando
+
+```sh
+$ go run ./cmd/main.go worldnews;videos
+```
+
+### Por bot do Telegram
+
+É necessário ter o token de acesso do bot na variável de ambiente `TELEGRAM_BOT_TOKEN`. Com isso, é só executar o programa:
+
+```sh
+$ go run ./bot/main.go
+```
+
+E enviar o comando para o seu bot:
+
+```
+> /nadaprafazer worldnews;videos
+```
