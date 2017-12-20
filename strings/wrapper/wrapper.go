@@ -34,6 +34,10 @@ func printLine(line []string, limit, length int) string {
 		return fmt.Sprintln()
 	}
 
+	if len(line) == 1 {
+		return fmt.Sprintln(line[0])
+	}
+
 	spaceCount := limit - length
 	wordSpaceCount := int(math.Trunc(float64(spaceCount / (len(line) - 1))))
 	spaces := strings.Repeat(" ", wordSpaceCount)
