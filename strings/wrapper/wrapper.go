@@ -1,36 +1,19 @@
-package main
+package wrapper
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math"
-	"os"
-	"strconv"
 	"strings"
 )
 
-func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("Usage: wrap <limit> <file>")
-		os.Exit(1)
-	}
-
-	limit, err := strconv.Atoi(os.Args[1])
-	if err != nil {
-		panic(err)
-	}
-
-	bytes, err := ioutil.ReadFile(os.Args[2])
-	if err != nil {
-		panic(err)
-	}
-
-	for _, p := range strings.Split(string(bytes), "\n") {
+func Wrap(text string, limit int) string {
+	result := ""
+	for _, p := range strings.Split(text, "\n") {
 		lineLength := 0
 		line := []string{}
 		for _, word := range strings.Split(p, " ") {
 			if lineLength+len(line)+len(word) > limit {
-				printLine(line, limit, lineLength)
+				result += printLine(line, limit, lineLength)
 				line = []string{word}
 				lineLength = len(word)
 				continue
@@ -40,14 +23,15 @@ func main() {
 			lineLength += len(word)
 		}
 
-		printLine(line, limit, lineLength)
+		result += printLine(line, limit, lineLength)
 	}
+
+	return result
 }
 
-func printLine(line []string, limit, length int) {
+func printLine(line []string, limit, length int) string {
 	if length == 0 {
-		fmt.Println()
-		return
+		return fmt.Sprintln()
 	}
 
 	spaceCount := limit - length
@@ -70,5 +54,5 @@ func printLine(line []string, limit, length int) {
 		acc += spaces + w
 	}
 
-	fmt.Println(acc)
+	return fmt.Sprintln(acc)
 }
